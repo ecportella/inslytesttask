@@ -115,3 +115,4 @@ public class SignUpTest extends BaseTest {
 		test.log(Status.PASS, "Test of the URL performed successfully.");
     }
 }
+
