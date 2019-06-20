@@ -29,7 +29,7 @@ public class SignUpPage extends BaseTest {
     public static SelenideElement phone = $x("//input[@id='broker_admin_phone']");
 
     //Terms and conditions section elements
-    public static SelenideElement termsAndConditionsCheckbox = $x("//input[@id='agree_termsandconditions']/..");
+    public static SelenideElement termsAndConditionsCheckbox = $x("//input[@id='agree_termsandconditions']/../span");
     public static SelenideElement termsAndConditionsLink = $x("//a[contains(text(),'terms and conditions')]");
     public static SelenideElement termsAndConditionsAgreeBtn = $x("//button[contains(text(),'I agree')]");
     public static SelenideElement privacyPolicyCheckbox = $x("//input[@id='agree_privacypolicy']/..");
@@ -105,7 +105,8 @@ public class SignUpPage extends BaseTest {
 
     //Terms and conditions section actions
     public static void clickTermsAndConditionsCheckbox() {
-        termsAndConditionsCheckbox.sendKeys(Keys.SPACE);
+        //termsAndConditionsCheckbox.sendKeys(Keys.SPACE);
+        click("Terms and Conditions checkbox", termsAndConditionsCheckbox);
     }
 
     public static void clickTermsAndConditionsLink() {
