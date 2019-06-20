@@ -19,7 +19,7 @@ Shall we prepare our machine to run those scripts?
 
 ### 2. Project Architecture
 
-- The project is splitted in 3 folders inside de src file from the project.
+- The project is splitted in 3 folders inside the src file of the project.
 - In the __functions__ folder we have the __base test__ that represents the test set up, configurations and report creation.
 - In the __pageObjects__ we have mapped all the elements that we want to control over the browser.
 - Lastly we have the __tests__ folder where we find our test itself.
