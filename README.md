@@ -8,7 +8,7 @@ It was written in __Java__ and the technologies used was __Maven__, __Selenide__
 - __Selenide__ is a wrapper of the Selenium WebDriver and was used in this project to automate the browser.
 - __TestNG__ was used to organize the project with annotations and test some assertions.
 - __JavaFaker__ is responsible for generating fake data for the tests.
-Finally, __ExtentReport__ is used to create a report from the tests runned.
+- Lastly, __ExtentReport__ is used to create a report from the tests runned.
 
 Shall we prepare our machine to run those scripts?
 
