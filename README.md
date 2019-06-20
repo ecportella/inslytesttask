@@ -14,7 +14,7 @@ Shall we prepare our machine to run those scripts?
 ### 1. Preparing
 
 - In order to run the scripts, we need to install on our machines the __Java JDK__ and the __Maven__ technologies.
-- Make sure to install the latest version of each technologie.
+- Make sure to install the latest version of each technology.
 - After you do install, make sure you can use then from wherever you are, adding then to your local path variable.
 
 ### 2. Project Architecture
