@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.codeborne.selenide.WebDriverRunner;
+import com.github.javafaker.Faker;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -20,10 +21,12 @@ public class SignUpTest extends BaseTest {
 		test.log(Status.PASS, MarkupHelper.createLabel("Sign Up test started", ExtentColor.GREEN));
 
 		//Generating Data for the test
-		String generatedCompanyName = "TestCompany"+Math.round(Math.random()*1000);
-		String generatedInslyAddress = generatedCompanyName.toLowerCase();
-		String generatedWorkEmail = generatedCompanyName.toLowerCase()+"@test.com";
-		test.log(Status.PASS, "Data for the tests generated successfully.");
+		Faker faker = new Faker();
+		String companyName = faker.company().name();
+		String inslyAddress = companyName.replaceAll("[, ]", "").toLowerCase();
+		String workEmail = faker.internet().emailAddress();
+		String accountManagerName = faker.name().name();
+		String phoneNumber = faker.phoneNumber().cellPhone();
 
 		//Waiting for the title 'Sign Up and Start Using'
 		SignUpPage.waitTitleSignUpAndStartUsing();
@@ -50,35 +53,35 @@ public class SignUpTest extends BaseTest {
 		test.log(Status.PASS, "Test of presence of the components performed successfully.");
 
 		//Filling the company section
-		SignUpPage.fillCompanyName(generatedCompanyName);
+		SignUpPage.fillCompanyName(companyName);
 		SignUpPage.selectCountry("Brazil");
 		SignUpPage.selectCompanyProfile("Software Development Company");
 		SignUpPage.selectNumberOfEmployees("6-10");
 		SignUpPage.selectHowWouldYouDescribeYourself("I am a tech guy");
 
 		//Testing the data filled in the company section
-		SignUpPage.companyName.shouldHave(value(generatedCompanyName));
+		SignUpPage.companyName.shouldHave(value(companyName));
 		SignUpPage.country.shouldHave(value("BR"));
-		SignUpPage.yourInslyAddress.shouldHave(value(generatedInslyAddress));
+		SignUpPage.yourInslyAddress.shouldHave(value(inslyAddress));
 		SignUpPage.companyProfile.shouldHave(value("SDC"));
 		SignUpPage.numberOfEmployees.shouldHave(value("10"));
 		SignUpPage.howWouldYouDescribeYourself.shouldHave(value("tech"));
 		test.log(Status.PASS, "Test of the data filled in the company section performed successfully.");
 
 		//Filling the administrator account details section
-		SignUpPage.fillWorkEmail(generatedWorkEmail);
-		SignUpPage.fillAccountManagerName("Test Name");
+		SignUpPage.fillWorkEmail(workEmail);
+		SignUpPage.fillAccountManagerName(accountManagerName);
 		SignUpPage.clickSuggestSecurePassword();
 		String generatedPassword = SignUpPage.passwordSuggested.getText(); //Getting the suggested password
 		SignUpPage.clickSuggestSecurePasswordBtnOk();
-		SignUpPage.fillPhoneNumber("35988770484");
+		SignUpPage.fillPhoneNumber(phoneNumber);
 
 		//Testing the data filled in the administrator account details section
-		SignUpPage.workEmail.shouldHave(value(generatedWorkEmail));
-		SignUpPage.accountManagerName.shouldHave(value("Test Name"));
+		SignUpPage.workEmail.shouldHave(value(workEmail));
+		SignUpPage.accountManagerName.shouldHave(value(accountManagerName));
 		SignUpPage.password.shouldNot(empty);
 		SignUpPage.passwordRepeat.shouldNot(empty);
-		SignUpPage.phone.shouldHave(value("+5535988770484"));
+		SignUpPage.phone.shouldHave(value("+55"+phoneNumber));
 		test.log(Status.PASS, "Test of the data filled in the administrator account section performed successfully.");
 
 		//Interacting with Terms and conditions section
@@ -101,17 +104,17 @@ public class SignUpTest extends BaseTest {
 		test.log(Status.PASS, "Test of the Buinding System creating the demo instance performed successfully.");
 
 		//Filling the login form
-		SignUpPage.fillEmailLogin(generatedWorkEmail);
+		SignUpPage.fillEmailLogin(workEmail);
 		SignUpPage.fillPasswordLogin(generatedPassword);
 		SignUpPage.clickLoginBtn();
 
 		//Testing if the user is logged in
-		SignUpPage.userInfo.shouldHave(text("Test Name"));
+		SignUpPage.userInfo.shouldHave(text(accountManagerName));
 		test.log(Status.PASS, "Test of the User Logged In performed successfully.");
 
 		//Testing if the current URL is the same shown on step 2 (but the training one)
 		String url = WebDriverRunner.url();
-		Assert.assertEquals(url, "https://"+generatedCompanyName.toLowerCase()+".int.staging.insly.training/dashboard");
+		Assert.assertEquals(url, "https://"+inslyAddress+".int.staging.insly.training/dashboard");
 		test.log(Status.PASS, "Test of the URL performed successfully.");
     }
 }
