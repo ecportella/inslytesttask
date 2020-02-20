@@ -1,7 +1,6 @@
-# inslyTestTask
-### Test automation for Insly Demo Instance.
+# Automation Test project using Selenide (Selenium), TestNG, Maven and ExtentReport
 
-Hello, this is the project for the test automation of the Insly Demo Instance.
+Hello, this is the project for the test automation of a project that I had the chance to participate.
 It was written in __Java__ and the technologies used was __Maven__, __Selenide__ (Selenium wrapper), __TestNG__, __JavaFaker__ and __ExtentReport__.
 
 - With __Maven__ we control dependencies and we can run the project from the terminal.
